@@ -1,0 +1,12 @@
+C:\BSU\Прога\2 курс\для учебы\2 сем\УП\MyRepository>git log
+commit 56d84239781e794f2263c93a065b2f6cd1c4e733 (HEAD -> master)
+Author: Popov Maxim <boecmaks@list.ru>
+Date:   Thu Feb 11 17:11:27 2021 +0300
+
+    add task1/status.txt
+
+commit f00442d20cd20f465e988c02bbd84cf45f7125c0
+Author: Popov Maxim <boecmaks@list.ru>
+Date:   Thu Feb 11 17:09:40 2021 +0300
+
+    add .gitignore
