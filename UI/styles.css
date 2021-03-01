@@ -158,9 +158,6 @@ main {
 	font-weight: bolder;
 }
 .post-info__rating-stars {
-	/*display: inline;*/
-	/*overflow: hidden;*/
-	/*width: 265px;*/
 }
 .post-info__rating-stars:not(:checked) > input {
 	display: none;
