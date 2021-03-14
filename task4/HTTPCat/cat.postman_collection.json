@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "21a7d04f-e3fd-47fe-9961-6605bee96420",
+		"name": "cat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://http.cat/[status_code]",
+					"protocol": "https",
+					"host": [
+						"http",
+						"cat"
+					],
+					"path": [
+						"[status_code]"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://http.cat/200",
+					"protocol": "https",
+					"host": [
+						"http",
+						"cat"
+					],
+					"path": [
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "201",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://http.cat/201",
+					"protocol": "https",
+					"host": [
+						"http",
+						"cat"
+					],
+					"path": [
+						"201"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
