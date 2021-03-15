@@ -14,9 +14,4 @@ public class StatusServlet extends HttpServlet {
         pw.println("<body text=\"red\">\"Application Is Running\"</body>");
         pw.println("</html>");
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

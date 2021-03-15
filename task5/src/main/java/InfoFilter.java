@@ -6,9 +6,10 @@ import java.io.PrintWriter;
 
 @WebFilter(filterName = "InfoFilter",urlPatterns = "/*")
 public class InfoFilter implements Filter {
+    @Override
     public void init(FilterConfig config) throws ServletException {
     }
-
+    @Override
     public void destroy() {
     }
 
@@ -27,8 +28,7 @@ public class InfoFilter implements Filter {
             pw.println("\"URL\" : \"" + url + (queryString!=null?("?" + queryString):"\","));
             pw.println("\"time\" : " + (timeEnd-timeStart));
             pw.println("}");
-        }
-        else {
+        } else {
             pw.print("<body><br>");
             String url = ((HttpServletRequest) request).getRequestURL().toString();
             String queryString = ((HttpServletRequest) request).getQueryString();
@@ -37,7 +37,6 @@ public class InfoFilter implements Filter {
                     + url + (queryString != null ? ("?" + queryString) : "") + " - "
                     + (timeEnd - timeStart) + "ms");
             pw.println("</body>");
-            //chain.doFilter(request,response);
         }
     }
 }

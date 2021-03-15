@@ -7,16 +7,10 @@ import java.io.PrintWriter;
 @WebServlet(name = "CheckServlet", value = "/check")
 public class CheckServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
-        //ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json");
         String json = "{\"sucesss\" : true}";
         pw.println(json);
-        //objectMapper.writeValue(pw,);
     }
 }

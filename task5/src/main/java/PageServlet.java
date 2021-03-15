@@ -8,18 +8,11 @@ public class PageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/page.jsp");
-        //view.forward(request, response);
         InputStream is = getServletContext().getResourceAsStream("/WEB-INF/page.html");
         Reader in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         PrintWriter pw = response.getWriter();
         while (in.ready()) {
             pw.print((char) in.read());
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

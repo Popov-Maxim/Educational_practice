@@ -10,15 +10,10 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
         String name = request.getParameter("name");
-        if(name!=null) {
+        if(name != null && name.length() <= 100) {
             pw.println("<body>");
             pw.println("Name is " + name);
             pw.println("</body>");
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
