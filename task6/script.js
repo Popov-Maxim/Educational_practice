@@ -279,13 +279,17 @@
         if(typeof adItem !== "object"){
             return err;
         }
-        if (adItem.id !== undefined && adList.find(item => item.id === adItem.id && item !== adItem) === undefined
-            && adItem.description !== undefined && adItem.description.length < 200
-            && adItem.createdAt !== undefined
-            && adItem.link !== undefined
-            && adItem.vendor !== undefined && adItem.vendor !== ""
-            && adItem.hashTags !== undefined
-            && adItem.discount !== undefined && adItem.validUntil !== undefined) {
+        if (adItem.id !== undefined && typeof adItem.id == "string"
+                && adList.find(item => item.id === adItem.id && item !== adItem) === undefined
+            && adItem.description !== undefined && typeof adItem.description == "string"
+                && adItem.description.length < 200
+            && adItem.createdAt !== undefined && adItem.createdAt instanceof Date
+            && adItem.link !== undefined && typeof adItem.link == "string"
+            && adItem.vendor !== undefined && typeof adItem.vendor == "string"
+                && adItem.vendor.trim() !== ""
+            && adItem.hashTags !== undefined && Array.isArray(adItem.hashTags)
+            && adItem.discount !== undefined && typeof adItem.discount == "string"
+            && adItem.validUntil !== undefined && adItem.createdAt instanceof Date) {
             return true;
         } else {
             return false;
@@ -338,7 +342,6 @@
     console.log(getAd('1').vendor);
     console.log(editAd('1', {vendor: 'fee'}));
     console.log(editAd('1', {id: '123'}));
-
     console.log(getAd('1').vendor);
 
     function removeAd(id) {
