@@ -245,6 +245,7 @@
                 }
 
             }
+            array = array.slice(skip, skip + top)
         }
         return array;
     }
