@@ -45,7 +45,7 @@ header {
 	background: transparent;
 	outline: none;
 	border: 0;
-	box-shadow: 0;
+	box-shadow: none;
 	font-size: 24px;
 }
 	
@@ -173,7 +173,7 @@ main {
 	text-shadow: 1px 1px #bbb;
 }
 .post-info__rating-stars:not(:checked) > label:before {
-	content: '★';
+	content: '\2605';
 }
 .post-info__rating-stars > input:checked ~ label {
 	color: gold;
@@ -299,7 +299,7 @@ main {
 	color: #333333;
 }
 .user-comment__rating:not(:checked) > label:before {
-	content: '★';
+	content: '\2605';
 }
 .user-comment__rating > input:checked ~ label {
 	color: gold;			
