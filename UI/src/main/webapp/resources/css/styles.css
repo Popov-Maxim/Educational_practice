@@ -27,6 +27,14 @@ header {
 }
 .header__button-add {
 }
+.header__log-in{
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 5%;
+	font-size: 24px;
+	width: 500px;
+	align-items: center;
+}
 .button-add {
 	background-color: #00C5C0;
 		outline: none;
@@ -201,7 +209,9 @@ main {
 }
 .post-info__photo {
 	width: 58%;
-	background-color: #00AEC8;
+}
+.post-info__photo > img {
+	width: 100%;
 }
 .post-info__discount {
 	padding: 2% 0;
