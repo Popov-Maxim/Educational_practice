@@ -24,8 +24,9 @@ class AdList {
                 }
 
             }
+            result = result.slice(skip, skip + top);
         }
-        return result.slice(skip, skip + top);
+        return result;
     }
     get(idFind) {
         if(typeof idFind !== "string"){

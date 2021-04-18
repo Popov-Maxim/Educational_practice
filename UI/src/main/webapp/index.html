@@ -5,97 +5,17 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/styles.css">
 	</head>
 	<body>
-<!--		<script src="script.js"></script>-->
 		<script src="resources/js/AdList.js"></script>
-		<script>
-			const adList = new AdList([
-				{
-					id: '1',
-					description: 'Скидка на стулья - до 15%',
-					createdAt: new Date('2021-03-15T23:00:00'),
-					link: 'https://coolchairs.com',
-					vendor: 'Chair Service',
-					photoLink: 'https://images.app.goo.gl/dgAFyP2cEduzkJUP9',
-					validUntil: new Date('2021-06-01T23:00:00'),
-					discount: '15%',
-					hashTags: ['tag1', 'tag2']
-				},
-
-				{
-					id: '2',
-					description: 'Вот вам яркий пример  -  плановых заданий обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствующей насущным потребностям.',
-					createdAt: new Date('2021-01-15T23:00:00'),
-					link: 'https://coolchairs.com',
-					vendor: 'Romus Brands',
-					photoLink: 'https://pbs.twimg.com/media/DyfDA0gXQAAom3b?format=jpg&name=small',
-					validUntil: new Date('2021-06-01T23:00:00'),
-					discount: '20%',
-					hashTags: ['furniture', 'chairs', 'tag1', 'tag2']
-				}
-			]);
-			console.log("correct add({..}): " + adList.add({
-				id: '4',
-				description: 'Следует отметить, что экономическая повестка сегодняшнего дня является качественно новой ступенью модели развития.',
-				createdAt: new Date('2020-01-05T23:00:00'),
-				link: 'https://coolchairs.com',
-				vendor: 'Talerink',
-				photoLink: 'https://b1.filmpro.ru/c/824432.700xp.jpg',
-				validUntil: new Date('2020-01-01T23:00:00'),
-				discount: '20%',
-				hashTags: ['furniture', 'chairs']
-			}));
-			console.log("incorrect add({..}): " + adList.add({
-				id: '4',
-				description: 'Следует отметить, что экономическая повестка сегодняшнего дня является качественно новой ступенью модели развития.',
-				createdAt: new Date('2020-01-05T23:00:00'),
-				link: 'https://coolchairs.com',
-				vendor: 'Talerink',
-				photoLink: 'https://b1.filmpro.ru/c/824432.700xp.jpg',
-				validUntil: new Date('2020-01-01T23:00:00'),
-				discount: '20%',
-				hashTags: ['furniture', 'chairs']
-			}));
-
-			console.log("getPage(0,10): ");
-			console.log(adList.getPage(0,10));
-
-			console.log("getPage(0,10,{..}): ");
-			console.log(adList.getPage(0, 10, {
-				fromDate: new Date('2010-03-15T23:00:00'),
-				toDate: new Date('2022-03-15T23:00:00'),
-				tags: ["tag1", "tag2"],
-				//vendor:"vendor"
-			}));
-
-			console.log("get('1'): ");
-			console.log(adList.get('1'));
-
-			console.log("edit('1',{vendor: 'fee'}): " + adList.edit('1', {vendor: 'fee'}));
-			console.log("edit('1',{id..}): " + adList.edit('1', {id: '123'}));
-			console.log(adList.get('1').vendor);
-
-			console.log("remove('4'): " + adList.remove('4'));
-			console.log("after remove:");
-			console.log(adList.getPage(0, 10));
-
-			console.log("clear():");
-			adList.clear();
-			console.log(adList.getPage(0,10));
-		</script>
+		<script src="resources/js/Builder.js"></script>
+		<script src="resources/js/Page.js"></script>
 		<header>
 			<div class="header__logo">
 				Profit!
 			</div>
-			<div class="header__user-menu">
+			<div class="header__log-in">
 				<div class="header__button-add">
-					<button class="button-add">Добавить</button>
-				</div> 
-				<div class="header__name">
-					Попов Максим
+					<button class="button-add">Войти</button>
 				</div>
-				<button class="header__button-log-out">
-					выйти
-				</button>
 			</div>
 		</header>
 		<main>
@@ -117,187 +37,11 @@
 					<div class="filter-tools__provider">
 						Поставщик:
 						<select  class="select-provider" >
-						  <option>Пункт 1</option>
-						  <option>Пункт 2</option>
 						</select>
 					</div>
 				</div>
 			</div>
 			<div class="post-feed">
-				<div class="post">
-					<div class="post-info">
-						<div class="post-info__head">
-							<div class="post-info__name">
-								Название услуги
-							</div>
-							<div class="post-info__rating" onclick="document.location='index.html'">
-								<div class="rating-value">4.0</div>
-								<div class="post-info__rating-stars">
-									<input type="radio" id="post-1-star-5" name="rating-post-1" value="5" disabled>
-									<label for="post-1-star-5" title="Оценка «5»"></label>	
-									<input type="radio" id="post-1-star-4" name="rating-post-1" value="4" disabled checked>
-									<label for="post-1-star-4" title="Оценка «4»"></label>    
-									<input type="radio" id="post-1-star-3" name="rating-post-1" value="3" disabled>
-									<label for="post-1-star-3" title="Оценка «3»"></label>  
-									<input type="radio" id="post-1-star-2" name="rating-post-1" value="2" disabled>
-									<label for="post-1-star-2" title="Оценка «2»"></label>    
-									<input type="radio" id="post-1-star-1" name="rating-post-1" value="1" disabled>
-									<label for="post-1-star-1" title="Оценка «1»"></label>
-								</div>	
-							</div>
-						</div>
-						<div class="post-info__content">
-							<div class="post-info__photo">
-								<img src="resources/photo.jpg" width="100%">
-								
-							</div>
-							<div class="post-info__description">
-								<p class="title">Краткое описание:</p>
-								<p>Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности играет важную роль в формировании позиций, занимаемых участниками в отношении поставленных задач. Задача организации, в особенности же сложившаяся структура организации требуют от нас анализа позиций, занимаемых участниками в отношении поставленных задач. Разнообразный и богатый опыт дальнейшее развитие различных форм деятельности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач.</p>
-							</div>
-
-						</div>
-						<div class="post-info__discount">
-									до 01.01.2021<br>
-									Скидка:20%
-						</div>
-						<div class="post-info__tags-n-change">
-							<div class="post-info__tags">
-								<p>Теги: </p>
-								<button class="button-tag" disabled>Тег1</button>
-								<button class="button-tag" disabled>Тег2</button>
-								<button class="button-tag" disabled>Тег3</button>
-								<button class="button-tag" disabled>...</button>
-							</div>
-						</div>
-						<div class="post-info__author">
-							<u><p>ссылка на полное описание: <a href="https://en.wikipedia.org/wiki/Psychology" target="_blank">https://en.wikipedia.org/wiki/Psychology</a></p></u>
-							<p>Вендор:<br>Попов Максим</p>
-						</div>
-					</div>
-					<div class="comment">
-						<p class="no-comment">НЕТ ОТЗЫВОВ</p>
-						<a class="add-comment" href="">добавить отзыв</a>
-					</div>
-				</div>
-				<div class="post">
-					<div class="post-info">
-						<div class="post-info__head">
-							<div class="post-info__name">
-								Название услуги
-							</div>
-							<div class="post-info__rating" onclick="document.location='index.html'">
-								<div class="rating-value">4.0</div>
-								<div class="post-info__rating-stars">
-									<input type="radio" id="post-4-star-5" name="rating-post-4" value="5" disabled>
-									<label for="post-4-star-5" title="Оценка «5»"></label>	
-									<input type="radio" id="post-4-star-4" name="rating-post-4" value="4" disabled checked>
-									<label for="post-4-star-4" title="Оценка «4»"></label>    
-									<input type="radio" id="post-4-star-3" name="rating-post-4" value="3" disabled>
-									<label for="post-4-star-3" title="Оценка «3»"></label>  
-									<input type="radio" id="post-4-star-2" name="rating-post-4" value="2" disabled>
-									<label for="post-4-star-2" title="Оценка «2»"></label>    
-									<input type="radio" id="post-4-star-1" name="rating-post-4" value="1" disabled>
-									<label for="post-4-star-1" title="Оценка «1»"></label>
-								</div>	
-							</div>
-						</div>
-						<div class="post-info__content">
-							<div class="post-info__photo">
-								<img src="resources/photo.jpg" width="100%">
-							</div>
-							<div class="post-info__description">
-								<p class="title">Краткое описание:</p>
-								<p>С другой стороны начало повседневной работы по формированию позиции требуют от нас анализа соответствующий условий активизации. Равным образом укрепление и развитие структуры требуют от нас анализа соответствующий условий активизации. Таким образом дальнейшее развитие различных форм деятельности требуют от нас анализа системы обучения кадров, соответствует насущным потребностям.</p>
-							</div>
-						</div>
-						<div class="post-info__discount">
-									до 01.01.2021<br>
-									Скидка:20%
-						</div>
-						<div class="post-info__tags-n-change">
-							<div class="post-info__tags">
-								<p>Теги: </p>
-								<button class="button-tag" disabled>Тег1</button>
-								<button class="button-tag" disabled>Тег2</button>
-								<button class="button-tag" disabled>Тег3</button>
-								<button class="button-tag" disabled>...</button>
-							</div>
-							<div class="change">
-								<a href="">Редактировать</a>
-								<a href="">Удалить</a>
-							</div>
-							
-						</div>
-						<div class="post-info__author">
-							<u><p>ссылка на полное описание: <a href="https://en.wikipedia.org/wiki/Psychology" target="_blank">https://en.wikipedia.org/wiki/Psychology</a></p></u>
-							<p>Вендор:<br>Попов Максим</p>
-						</div>
-					</div>
-					<div class="comment">
-						<div class="comments-area">
-							<div class="user-comment">
-								<div class="user-comment__author-n-rating">
-									<div class="user-comment__author"> Имя Фамилия</div>
-									<div class="user-comment__rating">
-										<input type="radio" id="user-1-star-5" name="rating-user-1" value="5" disabled>
-										<label for="user-1-star-5" title="Оценка «5»"></label>	
-										<input type="radio" id="user-1-star-4" name="rating-user-1" value="4" disabled checked>
-										<label for="user-1-star-4" title="Оценка «4»"></label>    
-										<input type="radio" id="user-1-star-3" name="rating-user-1" value="3" disabled>
-										<label for="user-1-star-3" title="Оценка «3»"></label>  
-										<input type="radio" id="user-1-star-2" name="rating-user-1" value="2" disabled>
-										<label for="user-1-star-2" title="Оценка «2»"></label>    
-										<input type="radio" id="user-1-star-1" name="rating-user-1" value="1" disabled>
-										<label for="user-1-star-1" title="Оценка «1»"></label>
-									</div>
-								</div>
-								<div class="user-comment__text">Не следует, однако забывать, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации соответствующий условий активизации. Значимость этих проблем настолько очевидна, что начало повседневной работы по формированию позиции требуют от нас анализа модели развития. Равным образом постоянное информационно-пропагандистское обеспечение нашей деятельности требуют от нас анализа форм развития. Задача организации, в особенности же начало повседневной работы по формированию позиции позволяет выполнять важные задания по разработке системы обучения кадров, соответствует насущным потребностям.</div>
-							</div>
-							<div class="user-comment">
-								<div class="user-comment__author-n-rating">
-									<div class="user-comment__author"> Имя Фамилия</div>
-									<div class="user-comment__rating">
-										<input type="radio" id="user-2-star-5" name="rating-user-2" value="5" disabled>
-										<label for="user-2-star-5" title="Оценка «5»"></label>	
-										<input type="radio" id="user-2-star-4" name="rating-user-2" value="4" disabled >
-										<label for="user-2-star-4" title="Оценка «4»"></label>    
-										<input type="radio" id="user-2-star-3" name="rating-user-2" value="3" disabled checked>
-										<label for="user-2-star-3" title="Оценка «3»"></label>  
-										<input type="radio" id="user-2-star-2" name="rating-user-2" value="2" disabled >
-										<label for="user-2-star-2" title="Оценка «2»"></label>    
-										<input type="radio" id="user-2-star-1" name="rating-user-2" value="1" disabled>
-										<label for="user-2-star-1" title="Оценка «1»"></label>
-									</div>
-								</div>
-								<div class="user-comment__text">Таким образом реализация намеченных плановых заданий способствует подготовки и реализации дальнейших направлений развития. Не следует, однако забывать, что постоянное информационно-пропагандистское обеспечение нашей деятельности представляет собой интересный эксперимент проверки соответствующий условий активизации.</div>
-							</div>
-							<div class="user-comment">
-								<div class="user-comment__author-n-rating">
-									<div class="user-comment__author"> Имя Фамилия</div>
-									<div class="user-comment__rating">
-										<input type="radio" id="user-3-star-5" name="rating-user-3" value="5" disabled>
-										<label for="user-3-star-5" title="Оценка «5»"></label>	
-										<input type="radio" id="user-3-star-4" name="rating-user-3" value="4" disabled >
-										<label for="user-3-star-4" title="Оценка «4»"></label>    
-										<input type="radio" id="user-3-star-3" name="rating-user-3" value="3" disabled>
-										<label for="user-3-star-3" title="Оценка «3»"></label>  
-										<input type="radio" id="user-3-star-2" name="rating-user-3" value="2" disabled checked>
-										<label for="user-3-star-2" title="Оценка «2»"></label>    
-										<input type="radio" id="user-3-star-1" name="rating-user-3" value="1" disabled>
-										<label for="user-3-star-1" title="Оценка «1»"></label>
-									</div>
-								</div>
-								<div class="user-comment__text">Товарищи! начало повседневной работы по формированию позиции позволяет выполнять важные задания по разработке систем массового участия. Задача организации, в особенности же дальнейшее развитие различных форм деятельности обеспечивает широкому кругу (специалистов) участие в формировании направлений прогрессивного развития.</div>
-							</div>
-						</div>
-						<a class="add-comment" href="">добавить отзыв</a>
-					</div>
-				</div>
-				
-				<div class="load-more" >
-					<button>Загрузить ещё</button>
-				</div>
 			</div>
 		</main>
 		<footer>
@@ -308,6 +52,7 @@
 
 			последнее изменение:<br>
 			01.03.2021</p>
-		</footer>	
+		</footer>
+		<script src="resources/js/Main.js"></script>
 	</body>
 </html>
