@@ -8,6 +8,8 @@
 		<script src="resources/js/AdList.js"></script>
 		<script src="resources/js/Builder.js"></script>
 		<script src="resources/js/Page.js"></script>
+		<script src="resources/js/Controller.js"></script>
+		<script src="resources/js/FilterConfig.js"></script>
 		<header>
 			<div class="header__logo">
 				Profit!
@@ -23,8 +25,8 @@
 				<div class="filter-tools">
 					<div class="filter-tools__date">
 						Дата:
-						<input type="text" class="input-date-from" placeholder="с...">
-						<input type="text" class="input-date-to" placeholder="до...">
+						<input type="date" class="input-date-from" placeholder="с...">
+						<input type="date" class="input-date-to" placeholder="до...">
 					</div>
 					<div class="filter-tools__tag">
 						Хештег:
@@ -42,6 +44,9 @@
 				</div>
 			</div>
 			<div class="post-feed">
+				<div class="load-more">
+                    <button id="load-more">Загрузить ещё</button>
+                </div>
 			</div>
 		</main>
 		<footer>

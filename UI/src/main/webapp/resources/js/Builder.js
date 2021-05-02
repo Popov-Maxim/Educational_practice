@@ -10,16 +10,24 @@ class Builder {
 
     createHead() {
         let userMenu = document.createElement("div");
-        userMenu.className = "header__user-menu";
-        userMenu.appendChild(document.createElement("div")).className = "header__button-add";
-        userMenu.lastElementChild.appendChild(document.createElement("button")).className = "button-add";
-        userMenu.lastElementChild.lastElementChild.textContent = "Добавить";
+        if (this._nameUser !== undefined && this._nameUser !== "") {
+            userMenu.className = "header__user-menu";
+            userMenu.appendChild(document.createElement("div")).className = "header__button-add";
+            userMenu.lastElementChild.appendChild(document.createElement("button")).className = "button-add";
+            userMenu.lastElementChild.lastElementChild.textContent = "Добавить";
 
-        userMenu.appendChild(document.createElement("div")).className = "header__name";
-        userMenu.lastElementChild.textContent = this._nameUser;
+            userMenu.appendChild(document.createElement("div")).className = "header__name";
+            userMenu.lastElementChild.textContent = this._nameUser;
 
-        userMenu.appendChild(document.createElement("button")).className = "header__button-log-out";
-        userMenu.lastElementChild.textContent = "выйти";
+            userMenu.appendChild(document.createElement("button")).className = "header__button-log-out";
+            userMenu.lastElementChild.textContent = "выйти";
+            userMenu.lastElementChild.id = "log-out";
+        } else {
+            userMenu.className = "header__log-in";
+            userMenu.appendChild(document.createElement("div")).className = "header__button-add";
+            userMenu.lastElementChild.appendChild(document.createElement("button")).className = "button-add";
+            userMenu.lastElementChild.lastElementChild.textContent = "Войти";
+        }
         return userMenu;
     }
 
