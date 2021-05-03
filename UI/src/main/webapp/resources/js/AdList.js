@@ -45,6 +45,7 @@ class AdList {
         if (AdList._validateAd(adItem) &&
             this._adList.find(item => item.id === adItem.id && item !== adItem) === undefined) {
             this._adList.push(adItem);
+            this._save();
             return true;
         } else {
             return false;
@@ -56,7 +57,10 @@ class AdList {
             return err;
         }
         let incorrectItem = [];
-        adList.forEach(value => this.add(value) ? true : incorrectItem.push(value));
+        if (adList.length) {
+            adList.forEach(value => this.add(value) ? true : incorrectItem.push(value));
+            this._save();
+        }
         return incorrectItem;
     }
 
@@ -71,6 +75,7 @@ class AdList {
         const resultItem = Object.assign(editableItem, adItem);
         if (AdList._validateAd(resultItem)) {
             editableItem = resultItem;
+            this._save();
             return true;
         } else {
             return false;
@@ -84,6 +89,7 @@ class AdList {
         const index = this._adList.findIndex(value => value.id === id);
         if (index !== -1) {
             this._adList.splice(index, 1);
+            this._save();
             return true;
         } else {
             return false;
@@ -92,6 +98,19 @@ class AdList {
 
     clear() {
         this._adList.splice(0, this._adList.length);
+        this._save();
+    }
+
+    restore() {
+        this._adList = JSON.parse(localStorage.getItem("AdList"));
+        for (const ad of this._adList) {
+            ad.createdAt = new Date(ad.createdAt);
+            ad.validUntil = new Date(ad.validUntil);
+        }
+    }
+
+    _save() {
+        localStorage.setItem("AdList",JSON.stringify(this._adList));
     }
 
     static _validateAd(adItem) {

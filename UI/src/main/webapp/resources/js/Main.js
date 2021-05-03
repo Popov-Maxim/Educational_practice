@@ -1,4 +1,4 @@
-const adList = new AdList([
+const adList = [
     {
         id: '1',
         description: 'Скидка на стулья - до 15%',
@@ -149,12 +149,13 @@ const adList = new AdList([
         hashTags: ['furniture', 'chairs', 'tag1', 'tag2'],
         reviews: ['fefefe']
     }
-]);
+];
+localStorage.setItem("AdList",JSON.stringify(adList));
 
 let page = new Page();
 page.root = 'post-feed';
 page.nameUser = 'Romus Brands';
 let controller = new Controller();
-controller.adList = adList;
+//controller.adList = adList;
 controller.page = page;
 controller.showPage();

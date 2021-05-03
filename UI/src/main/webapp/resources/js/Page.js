@@ -24,6 +24,10 @@ class Page {
 
     showSelectVendor(listVendor) {
         let providers = document.getElementsByClassName("select-provider").item(0);
+        while (providers.firstChild) {
+            providers.removeChild(providers.firstChild);
+        }
+
         providers.appendChild(document.createElement("option")).append("выберите");
         providers.lastElementChild.value = "";
         for (const vendor of listVendor) {

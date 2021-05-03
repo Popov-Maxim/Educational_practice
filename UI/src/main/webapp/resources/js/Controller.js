@@ -21,14 +21,16 @@ class Controller {
 
     constructor() {
         this._skip = 0;
+        this._adList = new AdList();
         self = this;
+        this._adList.restore();
     }
 
     showPage() {
         this._page.showHead();
         this._page.showSelectVendor(this._getVendors());
-        this.loadFirst();
-        this.init();
+        this._loadFirst();
+        this._init();
     }
 
     _getVendors() {
@@ -42,9 +44,9 @@ class Controller {
         return vendors;
     }
 
-    init() {
-        document.getElementById("load-more").addEventListener("click", this.loadMore);
-        if(document.getElementById("log-out")) {
+    _init() {
+        document.getElementById("load-more").addEventListener("click", this._loadMore);
+        if (document.getElementById("log-out")) {
             document.getElementById("log-out").addEventListener("click",
                 function () {
                     self._page.nameUser = undefined;
@@ -54,21 +56,36 @@ class Controller {
         let inputs = document.getElementsByClassName("filter-tools").item(0)
             .querySelectorAll("input");
         for (const input of inputs) {
-            input.addEventListener("change", this.loadFirst);
+            input.addEventListener("change", this._loadFirst);
         }
         document.getElementsByClassName("filter-tools__provider").item(0)
-            .querySelector("select").addEventListener("change", this.loadFirst);
+            .querySelector("select").addEventListener("change", this._loadFirst);
     }
 
-    loadFirst() {
+    _loadFirst() {
         self._skip = 0;
         self._page.clean();
-        self.loadMore();
+        self._loadMore();
     }
 
-    loadMore() {
+    _loadMore() {
         let adInPage = self._adList.getPage(self._skip, 10, self._page.getFilterConfig());
-        self._skip += adInPage.length;
         self._page.showAds(adInPage);
+        let tagNChange = document.getElementsByClassName("post-info__tags-n-change");
+        for (let i = self._skip; i < tagNChange.length; i++) {
+            let del = tagNChange.item(i).getElementsByClassName("change");
+            if (del.length) {
+                let id = tagNChange.item(i).parentElement.parentElement.id;
+                del.item(0).lastElementChild.addEventListener("click",
+                    function () {
+                        self._adList.remove(id);
+                        self._page.deleteAd(id);
+                        if (tagNChange.length <= 10) {
+                            self._loadFirst();
+                        }
+                    });
+            }
+        }
+        self._skip += adInPage.length;
     }
 }

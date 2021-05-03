@@ -117,7 +117,7 @@ class Builder {
             change.lastChild.href = "";
             change.append(" ");
             change.appendChild(document.createElement("a")).text = "Удалить";
-            change.lastChild.href = "";
+            //change.lastChild.href = "";
         }
         return postInfoTagsNChange;
     }
