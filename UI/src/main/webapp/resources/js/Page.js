@@ -4,7 +4,6 @@ class Page {
 
     _root
     _nameUser
-    _adList
 
     set root(value) {
         this._root = value;
@@ -12,10 +11,6 @@ class Page {
 
     set nameUser(value) {
         this._nameUser = value;
-    }
-
-    set adList(value) {
-        this._adList = value;
     }
 
     showHead() {
@@ -27,48 +22,73 @@ class Page {
 
     }
 
-    showSelectVendor() {
+    showSelectVendor(listVendor) {
         let providers = document.getElementsByClassName("select-provider").item(0);
-        let skip = 0;
-        let adList = this._adList.getPage(skip, 1);
-        while (adList.length !== 0) {
-            providers.appendChild(document.createElement("option")).append(adList[0].vendor);
-            adList = this._adList.getPage(++skip, 1);
+        while (providers.firstChild) {
+            providers.removeChild(providers.firstChild);
+        }
+
+        providers.appendChild(document.createElement("option")).append("выберите");
+        providers.lastElementChild.value = "";
+        for (const vendor of listVendor) {
+            providers.appendChild(document.createElement("option")).append(vendor);
+            providers.lastElementChild.value = vendor;
         }
     }
 
-    showAds() {
-        let adInPage = this._adList.getPage(0, 10);
+    showAds(adInPage) {
         let root = document.getElementsByClassName(this._root).item(0);
+        let button = root.lastElementChild;
         for (const i in adInPage) {
-            root.appendChild(new Builder(this._nameUser, adInPage[i]).createPost());
+            root.insertBefore(new Builder(this._nameUser, adInPage[i]).createPost(), button);
         }
-        root.appendChild(document.createElement("div")).className = "load-more";
-        root.lastElementChild.appendChild(document.createElement("button")).textContent = "Загрузить ещё";
+    }
+
+    clean() {
+        let root = document.getElementsByClassName(this._root).item(0);
+        while (root.firstElementChild.className !== "load-more") {
+            root.removeChild(root.firstChild);
+        }
     }
 
     addAd(ad) {
-        if (this._adList.add(ad)) {
-            document.getElementsByClassName(this._root).item(0).insertBefore(ad, document.getElementsByClassName("load-more").item(0));
-        }
+        document.getElementsByClassName(this._root).item(0).insertBefore(ad, document.getElementsByClassName("load-more").item(0));
     }
 
     deleteAd(id) {
-        if (this._adList.remove(id)) {
-            document.getElementById(id).remove();
-            return true;
-        } else {
-            return false;
-        }
+        document.getElementById(id).remove();
     }
 
     editAd(id, adItem) {
-        this._adList.edit(id, adItem);
         let root = document.getElementsByClassName(this._root).item(0);
         let oldChild = document.getElementById(id);
-        let newChild = new Builder(this._nameUser, this._adList.get(id)).createPost();
+        let newChild = new Builder(this._nameUser, adItem).createPost();
         if (oldChild !== undefined) {
             root.replaceChild(newChild, oldChild);
         }
+    }
+
+    getFilterConfig() {
+        let filterConfig = new FilterConfig();
+        let date = document.getElementsByClassName("filter-tools__date").item(0);
+        if (!isNaN(new Date(date.firstElementChild.value))) {
+            filterConfig.fromDate = new Date(date.firstElementChild.value);
+        }
+        if (!isNaN(new Date(date.lastElementChild.value))) {
+            filterConfig.toDate = new Date(date.lastElementChild.value);
+        }
+        let tags = document.getElementsByClassName("filter-tools__all-tag").item(0)
+            .querySelectorAll("input");
+        for (const tag of tags) {
+            if (tag.value.trim() !== "") {
+                filterConfig.tags.push(tag.value);
+            }
+        }
+        let vendor = document.getElementsByClassName("select-provider").item(0);
+        if (vendor.value !== undefined && vendor.value.trim() !== "") {
+            filterConfig.vendor = vendor.value;
+        }
+        console.log(filterConfig);
+        return filterConfig;
     }
 }

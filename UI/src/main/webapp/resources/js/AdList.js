@@ -1,10 +1,13 @@
 class AdList {
     _adList = [];
+
     constructor(adList = []) {
         this.addAll(adList);
     }
+
     getPage(skip = 0, top = 10, filterConfig = null) {
-        if(typeof skip !== "number" || typeof top !== "number" || typeof filterConfig !== "object"){
+        if (typeof skip !== "number" || typeof top !== "number"
+            || (filterConfig !== null && !(filterConfig instanceof FilterConfig))) {
             return err;
         }
         let result = [];
@@ -16,9 +19,8 @@ class AdList {
                     && (filterConfig.toDate === undefined || this._adList[i].createdAt <= filterConfig.toDate)
                     && (filterConfig.vendor === undefined || this._adList[i].vendor === filterConfig.vendor)) {
 
-                    if (filterConfig.tags.
-                            every(tagNeed =>
-                                this._adList[i].hashTags.find(tag => tag === tagNeed) !== undefined)) {
+                    if (filterConfig.tags.every(tagNeed =>
+                        this._adList[i].hashTags.find(tag => tag === tagNeed) !== undefined)) {
                         result.push(this._adList[i]);
                     }
                 }
@@ -28,34 +30,42 @@ class AdList {
         }
         return result;
     }
+
     get(idFind) {
-        if(typeof idFind !== "string"){
+        if (typeof idFind !== "string") {
             return err;
         }
         return this._adList.find(item => item.id === idFind);
     }
+
     add(adItem) {
-        if(typeof adItem !== "object"){
+        if (typeof adItem !== "object") {
             return err;
         }
         if (AdList._validateAd(adItem) &&
-                this._adList.find(item => item.id === adItem.id && item !== adItem) === undefined) {
+            this._adList.find(item => item.id === adItem.id && item !== adItem) === undefined) {
             this._adList.push(adItem);
+            this._save();
             return true;
         } else {
             return false;
         }
     }
-    addAll(adList){
-        if(!(Array.isArray(adList))){
+
+    addAll(adList) {
+        if (!(Array.isArray(adList))) {
             return err;
         }
         let incorrectItem = [];
-        adList.forEach(value =>  this.add(value)? true : incorrectItem.push(value));
+        if (adList.length) {
+            adList.forEach(value => this.add(value) ? true : incorrectItem.push(value));
+            this._save();
+        }
         return incorrectItem;
     }
+
     edit(id, adItem) {
-        if(typeof id !== "string" || typeof adItem !== "object"){
+        if (typeof id !== "string" || typeof adItem !== "object") {
             return err;
         }
         if (adItem.id !== undefined) {
@@ -65,28 +75,46 @@ class AdList {
         const resultItem = Object.assign(editableItem, adItem);
         if (AdList._validateAd(resultItem)) {
             editableItem = resultItem;
+            this._save();
             return true;
         } else {
             return false;
         }
     }
+
     remove(id) {
-        if(typeof id !== "string"){
+        if (typeof id !== "string") {
             return err;
         }
         const index = this._adList.findIndex(value => value.id === id);
         if (index !== -1) {
             this._adList.splice(index, 1);
+            this._save();
             return true;
         } else {
             return false;
         }
     }
-    clear(){
+
+    clear() {
         this._adList.splice(0, this._adList.length);
+        this._save();
     }
+
+    restore() {
+        this._adList = JSON.parse(localStorage.getItem("AdList"));
+        for (const ad of this._adList) {
+            ad.createdAt = new Date(ad.createdAt);
+            ad.validUntil = new Date(ad.validUntil);
+        }
+    }
+
+    _save() {
+        localStorage.setItem("AdList", JSON.stringify(this._adList));
+    }
+
     static _validateAd(adItem) {
-        if(typeof adItem !== "object"){
+        if (typeof adItem !== "object") {
             return err;
         }
         if (adItem.id !== undefined && typeof adItem.id == "string"
