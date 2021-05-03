@@ -225,7 +225,7 @@
     console.log(adList);
 
     function getAds(skip = 0, top = 10, filterConfig = null) {
-        if(typeof skip !== "number" || typeof top !== "number" || typeof filterConfig !== "object"){
+        if (typeof skip !== "number" || typeof top !== "number" || typeof filterConfig !== "object") {
             return err;
         }
         var array = [];
@@ -237,9 +237,8 @@
                     && (filterConfig.toDate === undefined || adList[i].createdAt <= filterConfig.toDate)
                     && (filterConfig.vendor === undefined || adList[i].vendor === filterConfig.vendor)) {
 
-                    if (filterConfig.tags.
-                            every(tagNeed =>
-                                adList[i].hashTags.find(tag => tag === tagNeed) !== undefined)) {
+                    if (filterConfig.tags.every(tagNeed =>
+                        adList[i].hashTags.find(tag => tag === tagNeed) !== undefined)) {
                         array.push(adList[i]);
                     }
                 }
@@ -261,7 +260,7 @@
     console.log(getAds(1, 1, filterConfig));
 
     function getAd(idFind) {
-        if(typeof idFind !== "string"){
+        if (typeof idFind !== "string") {
             return err;
         }
         return adList.find(item => item.id === idFind);
@@ -270,17 +269,17 @@
     console.log(getAd('1'));
 
     function validateAd(adItem) {
-        if(typeof adItem !== "object"){
+        if (typeof adItem !== "object") {
             return err;
         }
         if (adItem.id !== undefined && typeof adItem.id == "string"
-                && adList.find(item => item.id === adItem.id && item !== adItem) === undefined
+            && adList.find(item => item.id === adItem.id && item !== adItem) === undefined
             && adItem.description !== undefined && typeof adItem.description == "string"
-                && adItem.description.length < 200
+            && adItem.description.length < 200
             && adItem.createdAt !== undefined && adItem.createdAt instanceof Date
             && adItem.link !== undefined && typeof adItem.link == "string"
             && adItem.vendor !== undefined && typeof adItem.vendor == "string"
-                && adItem.vendor.trim() !== ""
+            && adItem.vendor.trim() !== ""
             && adItem.hashTags !== undefined && Array.isArray(adItem.hashTags)
             && adItem.discount !== undefined && typeof adItem.discount == "string"
             && adItem.validUntil !== undefined && adItem.createdAt instanceof Date) {
@@ -305,7 +304,7 @@
     console.log(validateAd(incorrect));
 
     function addAd(adItem) {
-        if(typeof adItem !== "object"){
+        if (typeof adItem !== "object") {
             return err;
         }
         if (validateAd(adItem)) {
@@ -329,7 +328,7 @@
     }))
 
     function editAd(id, adItem) {
-        if(typeof id !== "string" || typeof adItem !== "object"){
+        if (typeof id !== "string" || typeof adItem !== "object") {
             return err;
         }
         if (adItem.id !== undefined) {
@@ -351,7 +350,7 @@
     console.log(getAd('1').vendor);
 
     function removeAd(id) {
-        if(typeof id !== "string"){
+        if (typeof id !== "string") {
             return err;
         }
         var index = adList.findIndex(value => value.id === id);

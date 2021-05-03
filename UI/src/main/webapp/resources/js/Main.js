@@ -150,7 +150,7 @@ const adList = [
         reviews: ['fefefe']
     }
 ];
-localStorage.setItem("AdList",JSON.stringify(adList));
+localStorage.setItem("AdList", JSON.stringify(adList));
 
 let page = new Page();
 page.root = 'post-feed';

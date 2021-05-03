@@ -110,7 +110,7 @@ class AdList {
     }
 
     _save() {
-        localStorage.setItem("AdList",JSON.stringify(this._adList));
+        localStorage.setItem("AdList", JSON.stringify(this._adList));
     }
 
     static _validateAd(adItem) {
